@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-1
+  namespace: argocd
+spec:
+  source:
+    repoURL: https://github.com/amar-chand/argocd-monorepo.git
+    targetRevision: HEAD
+    path: apps/app-1
+  destination:
+    name: in-cluster
+    namespace: default
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  
